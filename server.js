@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
+const colors = require('colors')
 const connectDB = require('./config/db.config')
 
 // load env vars
@@ -26,6 +27,7 @@ const server = app.listen(
 	PORT,
 	console.log(
 		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+			.magenta.bold
 	)
 )
 
@@ -33,7 +35,7 @@ const server = app.listen(
 process.on(
 	'unhandledRejection',
 	(error, promise) => {
-		console.log(`Error: ${error.message}`)
+		console.log(`Error: ${error.message}`.red)
 
 		// close the server and exit process
 		server.close(() => process.exit(1))
